@@ -83,8 +83,9 @@ def game_loop():
         y += y_change
        
         gameDisplay.blit(bgImg, (0,0))
-        #gameDisplay.blit(peopImg, (0,0))
         hero(heroStill, x,y)
+        gameDisplay.blit(bgImg, (0,0))
+        hero(heroWalk, x,y)
 
         #boundaries 
         if x > display_width - hero_width or x < 0:
