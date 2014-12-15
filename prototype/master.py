@@ -11,27 +11,24 @@ PINK   = ( 255,   0, 255)
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
-BG = pygame.image.load('bg-game-play.png') 
+BG = pygame.image.load('img/bg-game-play.png')
+HERO = pygame.image.load('img/heroes/hero-male.png')
+PEOPLE = pygame.image.load('img/people/person1-afraid.png') 
 
 class People(pygame.sprite.Sprite):
     """
     This class represents people to save by the player.
     """
 
-    def __init__(self, color, width, height):
+    def __init__(self):
         """ Constructor. Pass in the color of the block,
         and its x and y position. """
 
         # Call the parent class (Sprite) constructor
         super().__init__()
 
-        # Create an image of the block, and fill it with a color.
-        # This could also be an image loaded from the disk.
-        self.image = pygame.Surface([width, height])
-        self.image.fill(color)
+        self.image = PEOPLE
 
-        # Fetch the rectangle object that has the dimensions of the image
-        # image.
         # Update the position of this object by setting the values
         # of rect.x and rect.y
         self.rect = self.image.get_rect()
@@ -67,9 +64,7 @@ class Player(pygame.sprite.Sprite):
         # Call the parent's constructor
         super().__init__()
  
-        # Set height, width
-        self.image = pygame.Surface([30, 30])
-        self.image.fill(PINK)
+        self.image = HERO
  
         # Make our top-left corner the passed-in location.
         self.rect = self.image.get_rect()
@@ -131,12 +126,12 @@ class Room1(Room):
  
         # This is a list of walls. Each is in the form [x, y, width, height]
         walls = [[ 15,  95,  20, 160, WHITE],
-                 [ 15, 350,  20, 235, WHITE],
+                 [ 15, 425,  20, 160, WHITE],
                  [765,  95,  20, 160, WHITE],
-                 [765, 350,  20, 235, WHITE],
+                 [765, 425,  20, 160, WHITE],
                  [ 20,  95, 760,  20, WHITE],
                  [ 20, 565, 760,  20, WHITE],
-                 [390, 200,  20, 300, WHITE]
+                 [390, 250,  20, 200, WHITE]
                 ]
  
         # Loop through the list. Create the wall, add it to the list
@@ -207,13 +202,15 @@ def main():
     people_list = pygame.sprite.Group()
 
     # Create people in random position
-    for i in range(10):
+    for i in range(5):
         # This represents a block
-        people = People(BLACK, 20, 15)
+        people = People()
 
         # Set a random location for the block
-        people.rect.x = random.randrange(SCREEN_WIDTH)
-        people.rect.y = random.randrange(SCREEN_HEIGHT)
+        people.rect.x = random.randrange(20, SCREEN_WIDTH-200)
+        people.rect.y = random.randrange(100, SCREEN_HEIGHT-200)
+        #people.rect.x = SCREEN_WIDTH-200
+        #people.rect.y = SCREEN_HEIGHT-200
 
         # Add the block to the list of objects
         people_list.add(people)
